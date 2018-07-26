@@ -17,13 +17,9 @@ const graph = new Graph({
   frequencies: hearTest.frequencies
 });
 
-graph.reset();
-
-// document.querySelector('.controls__start').disabled = true;
-
-
 document.querySelector('.controls__start').addEventListener('click', () => {
   hearTest.startTest();
+  graph.reset();
   document.querySelector('.controls__start').disabled = true;
   document.querySelector('.controls__stop').disabled = false;
   document.querySelector('.controls__confirmator').classList.add('controls__confirmator--red');
