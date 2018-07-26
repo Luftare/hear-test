@@ -1,12 +1,14 @@
 class HearTest {
-  constructor(props) {
+  constructor({
+    onTestReady = () => {}
+  }) {
     const atx = new (window.webkitAudioContext || window.AudioContext)();
 
     this.attack = 100;
     this.release = 50;
-    this.toneDuration = 1000;
+    this.toneDuration = 1200;
     this.toneWaitTime = 3000;
-    this.toneWaitTimeMaxRandomComponent = 3000;
+    this.toneWaitTimeMaxRandomComponent = 4000;
     this.lowestFrequency = 250;
     this.octaves = 7;//250 ... 16000 Hz
     this.lastToneStartTime = 0;
@@ -15,7 +17,7 @@ class HearTest {
     this.testTimeoutId = 0;
     this.intensityLevels = 11;
     this.maxAttenuationIndB = 110;
-
+    this.onTestReady = onTestReady;
 
     this.tests = [...Array(this.octaves * 2)].map((_, i) => ({
       level: -1,
@@ -23,6 +25,7 @@ class HearTest {
       frequency: this.lowestFrequency * (2 ** (i % 2 === 0 ? i / 2 : (i - 1) / 2)),
       ear: i % 2
     }));
+    this.frequencies = this.tests.filter(test => test.ear === 0).map(test => test.frequency)
 
     this.atx = atx;
     this.osc = atx.createOscillator();
@@ -50,10 +53,25 @@ class HearTest {
     return this.toneWaitTime + this.toneWaitTimeMaxRandomComponent * Math.random();
   }
 
+  get levelIndB() {
+    return this.maxAttenuationIndB / this.intensityLevels;
+  }
+
   startTest() {
+    this.tests = [...Array(this.octaves * 2)].map((_, i) => ({
+      level: -1,
+      passed: false,
+      frequency: this.lowestFrequency * (2 ** (i % 2 === 0 ? i / 2 : (i - 1) / 2)),
+      ear: i % 2
+    }));
     this.testTimeoutId = setTimeout(() => {
       this.tickTest();
     }, this.toneTimeout);
+  }
+
+  stopTest() {
+    clearTimeout(this.testTimeoutId);
+    return this.tests;
   }
 
   tickTest() {
@@ -119,7 +137,13 @@ class HearTest {
   }
 
   endTest() {
-    console.log(this.tests);
+    const data = {
+      intensityLevels: this.intensityLevels,
+      frequencies: this.frequencies,
+      levelIndB: this.maxAttenuationIndB / this.intensityLevels,
+      results: this.tests
+    }
+    this.onTestReady(data);
   }
 
   levelToGain(level) {
