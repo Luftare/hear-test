@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <a id="link"></a>
   </head>
   <body>
     <div class="content">
@@ -23,7 +24,12 @@
           </ul>
         </div>
       </div>
-      <canvas id="graph"></canvas>
+      <div class="graph">
+        <div class="graph__download">
+          <button class="graph__download-button" disabled>DOWNLOAD</button>
+        </div>
+        <canvas class="graph__canvas"></canvas>
+      </div>
       <div class="controls">
         <button class="controls__start">START</button>
         <button class="controls__stop" disabled>STOP</button>
@@ -31,8 +37,24 @@
       </div>
     </div>
     <div class="footer">
-      <span class="footer__signature">By: Luftare</span>
+      <h2>About this test</h2>
+      <p>
+        The test is specialized in measuring relative hearing sensitivity in the frequency domain. It will help to identify possible hearing loss in particular frequency range. Unless carefully calibrated the absolute sensitivity levels will not be reliable.
+      </p>
+      <p>
+        Some of the major factors affecting the test's accuracy:
+        <ul>
+          <li>Frequency response of headphones and the audio card</li>
+          <li>There's no easy way to calibrate the absolute intensity level of the test tones. This leads to <a href="https://en.wikipedia.org/wiki/Observational_error">systematic error</a> in the end results.</li>
+          <li>Possible ambient noise</li>
+          <li>All frequencies are tested with equal intensity while ears have non-linear <a href="https://en.wikipedia.org/wiki/Equal-loudness_contour">equal-loudness contour</a></li>
+        </ul>
+      </p>
+      <p>
+        This test is powered by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>.
+      </p>
     </div>
+    <a class="signature" href="https://luftare.com">By: Luftare</a>
     <script src="heartest.js"></script>
     <script src="graph.js"></script>
     <script src="main.js"></script>
