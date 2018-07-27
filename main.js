@@ -11,8 +11,6 @@ const hearTest = new HearTest({
   }
 });
 
-//hearTest.startTest();
-
 const graph = new Graph({
   canvas,
   levels: hearTest.intensityLevels,
