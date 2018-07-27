@@ -10,13 +10,13 @@ class HearTest {
     this.toneWaitTime = 3000;
     this.toneWaitTimeMaxRandomComponent = 4000;
     this.lowestFrequency = 250;
-    this.octaves = 7;//250 ... 16000 Hz
+    this.octaves = 7;
     this.lastToneStartTime = 0;
     this.activeTone = null;
     this.toneEnvelopeTimeoutId = 0;
     this.testTimeoutId = 0;
-    this.intensityLevels = 11;
-    this.maxAttenuationIndB = 110;
+    this.intensityLevels = 10;
+    this.maxAttenuationIndB = 90;
     this.onTestReady = onTestReady;
 
     this.tests = [...Array(this.octaves * 2)].map((_, i) => ({
@@ -54,7 +54,7 @@ class HearTest {
   }
 
   get levelIndB() {
-    return this.maxAttenuationIndB / this.intensityLevels;
+    return this.maxAttenuationIndB / (this.intensityLevels - 1);
   }
 
   startTest() {
@@ -87,13 +87,13 @@ class HearTest {
 
   handleResponse() {
     if(this.activeTone) {
-      console.log("Registered: ", this.activeTone.frequency, this.activeTone.level);
+      console.log(`Tone registered: ${this.activeTone.frequency} Hz`);
       this.activeTone.passed = true;
     }
   }
 
   testIsReady() {
-    return !this.tests.find(tone => !tone.passed && tone.level < this.intensityLevels);
+    return !this.tests.find(tone => !tone.passed);
   }
 
   generateAvailableTone() {
@@ -113,14 +113,14 @@ class HearTest {
   }
 
   randomizeAvailableTone() {
-    const availableTones = this.tests.filter(tone => !tone.passed && tone.level < this.intensityLevels);
+    const availableTones = this.tests.filter(tone => !tone.passed);
     const index = Math.floor(availableTones.length * Math.random());
     return availableTones[index];
   }
 
   startTone({ frequency, ear, level }) {
-    console.log("Played: ", frequency, level);
     const gain = this.levelToGain(level);
+    console.log(`Tone at ${ear === 0 ? 'left' : 'right'}: ${frequency} Hz, intensity level ${level}, (${this.levelToAttenuation(level)} dB, ${gain} gain)`);
     this.lastToneStartTime = Date.now();
     this.setPan(ear);
     this.osc.frequency.setValueAtTime(frequency, 0);
@@ -147,8 +147,10 @@ class HearTest {
   }
 
   levelToGain(level) {
-    const stepIndB = this.maxAttenuationIndB / this.intensityLevels;
-    const attenuation = -(this.intensityLevels - level) * stepIndB;
-    return Math.pow(10, (attenuation / 20));
+    return Math.pow(10, (this.levelToAttenuation(level) / 20));
+  }
+
+  levelToAttenuation(level) {
+    return -(this.intensityLevels - level - 1) * this.levelIndB;
   }
 }

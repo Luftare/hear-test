@@ -5,6 +5,9 @@ const hearTest = new HearTest({
     const rightData = data.results.filter(test => test.ear === 1).map(test => test.level);
     graph.plot(leftData, "Left ear");
     graph.plot(rightData, "Right ear");
+    document.querySelector('.controls__start').disabled = false;
+    document.querySelector('.controls__stop').disabled = true;
+    document.querySelector('.controls__confirmator').classList.remove('controls__confirmator--red');
   }
 });
 
@@ -35,9 +38,9 @@ document.querySelector('.controls__stop').addEventListener('click', () => {
 
 window.addEventListener("keydown", (e) => {
   const confirmator = document.querySelector('.controls__confirmator');
-  confirmator.classList.add('controls__confirmator--active');
+  confirmator.classList.add('controls__confirmator--green');
   setTimeout(() => {
-    confirmator.classList.remove('controls__confirmator--active');
-  }, 155);
+    confirmator.classList.remove('controls__confirmator--green');
+  }, 200);
   hearTest.handleResponse();
 })

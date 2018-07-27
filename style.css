@@ -1,5 +1,18 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+
 body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
   background: #ccc;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
 }
 
 #graph {
@@ -12,8 +25,50 @@ body {
 .content {
   box-shadow: 2px 2px 5px 0 #777;
   max-width: 700px;
-  margin: 0 auto;
-  margin-top: 10vw;
+  margin: 36px auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.header {
+  color: white;
+  background-color: #444;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 140px;
+}
+
+.header__title {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header__details {
+  font-size: 0.7em;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: #ccc;
+
+}
+
+.header__details h2, h3, h4 {
+  font-weight: normal;
+  margin-bottom: 2px;
+}
+
+.header__details ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.header__details li {
+  margin: 0;
 }
 
 .controls {
@@ -26,12 +81,19 @@ body {
 }
 
 .controls__start {
+  width: 90px;
+  text-align: center;
   border: none;
   border-radius: 4px;
   padding: 12px;
-  font-size: 24px;
+  font-size: 18px;
   color: lightgreen;
   box-shadow: 2px 2px 5px 0 #777;
+}
+
+.controls__start:active,  {
+  transform: translateY(1px) scale(0.99, 0.99);
+  box-shadow: none;
 }
 
 .controls__start:disabled {
@@ -39,12 +101,19 @@ body {
 }
 
 .controls__stop {
+  width: 90px;
+  text-align: center;
   border: none;
   border-radius: 4px;
   padding: 12px;
-  font-size: 24px;
+  font-size: 18px;
   color: red;
   box-shadow: 2px 2px 5px 0 #777;
+}
+
+.controls__stop:active {
+  transform: translateY(1px) scale(0.99, 0.99);
+  box-shadow: none;
 }
 
 .controls__stop:disabled {
@@ -60,18 +129,25 @@ body {
   width: 20px;
   height: 20px;
   background: #444;
-  transition: all 400ms;
+  transition: all 100ms;
   box-shadow: 2px 2px 5px 0 #777;
 }
 
 .controls__confirmator--red {
-  transition: all 0ms;
-  background: #f00;
-  box-shadow: 2px 2px 5px 0 #f00;
+  background: #f33;
+  box-shadow: 0 0 20px 0 #f00;
 }
 
-.controls__confirmator--active {
-  transition: all 0ms;
+.controls__confirmator--green {
   background: lightgreen;
-  box-shadow: 0 0 25px 0 #0f0;
+  box-shadow: 0 0 20px 0 #0f0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  padding: 8px;
+  width: 100%;
+  text-align: right;
+  box-sizing: border-box;
 }
