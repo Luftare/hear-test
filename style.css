@@ -151,3 +151,7 @@ h1, h2, h3, h4 {
   text-align: right;
   box-sizing: border-box;
 }
+
+.footer__signature {
+  color: #777;
+}
