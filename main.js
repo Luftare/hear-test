@@ -37,6 +37,7 @@ document.querySelector('.controls__stop').addEventListener('click', () => {
 
 
 window.addEventListener("keydown", (e) => {
+  e.preventDefault();
   const confirmator = document.querySelector('.controls__confirmator');
   confirmator.classList.add('controls__confirmator--green');
   setTimeout(() => {
