@@ -68,8 +68,8 @@ window.addEventListener("keydown", (e) => {
 function initMobileAudio(e) {
   const osc = atx.createOscillator();
   const gain = atx.createGain();
-  gain.gain.setValueAtTime(0.001, 0);
-  osc.frequency.setValueAtTime(30, 0);
+  gain.gain.setValueAtTime(0.7, 0);
+  osc.frequency.setValueAtTime(250, 0);
   osc.connect(gain);
   gain.connect(atx.destination);
   osc.start(0);
@@ -78,7 +78,7 @@ function initMobileAudio(e) {
     osc.disconnect();
     gain.disconnect();
     window.removeEventListener('touchstart', initMobileAudio);
-  }, 500);
+  }, 1000);
 }
 
 window.addEventListener('touchstart', initMobileAudio);
