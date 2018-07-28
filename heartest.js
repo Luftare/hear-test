@@ -1,9 +1,8 @@
 class HearTest {
   constructor({
-    onTestReady = () => {}
+    onTestReady = () => {},
+    atx = new (window.webkitAudioContext || window.AudioContext)()
   }) {
-    const atx = new (window.webkitAudioContext || window.AudioContext)();
-
     this.attack = 100;
     this.release = 50;
     this.toneDuration = 1200;

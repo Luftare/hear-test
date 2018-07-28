@@ -1,13 +1,15 @@
 const canvas = document.querySelector(".graph__canvas");
+const atx = new (window.webkitAudioContext || window.AudioContext)();
 
 const hearTest = new HearTest({
+  atx,
   onTestReady: data => {
     const leftData = data.results.filter(test => test.ear === 0).map(test => test.level);
     const rightData = data.results.filter(test => test.ear === 1).map(test => test.level);
     graph.plot(leftData, "Left ear");
     graph.plot(rightData, "Right ear");
-    document.querySelector('.controls__start').disabled = false;
-    document.querySelector('.controls__stop').disabled = true;
+    document.querySelector('.controls__start-stop').innerHTML = 'START';
+    document.querySelector('.controls__start-stop').classList.remove('controls__start-stop--red');
     document.querySelector('.controls__confirmator').classList.remove('controls__confirmator--red');
     document.querySelector('.graph__download-button').disabled = false;
     document.querySelector('.controls__register').disabled = true;
@@ -62,6 +64,24 @@ window.addEventListener("keydown", (e) => {
   blinkConfirmator();
   hearTest.handleResponse();
 })
+
+function initMobileAudio(e) {
+  const osc = atx.createOscillator();
+  const gain = atx.createGain();
+  gain.gain.setValueAtTime(0.001, 0);
+  osc.frequency.setValueAtTime(30, 0);
+  osc.connect(gain);
+  gain.connect(atx.destination);
+  osc.start(0);
+  setTimeout(() => {
+    osc.stop();
+    osc.disconnect();
+    gain.disconnect();
+    window.removeEventListener('touchstart', initMobileAudio);
+  }, 500);
+}
+
+window.addEventListener('touchstart', initMobileAudio);
 
 document.querySelector('.graph__download-button').addEventListener('click', () => {
   const link = document.getElementById('link');
