@@ -15,13 +15,12 @@
         <h1 class="header__title">Hear test</h1>
         <div class="header__details">
           <h3>How well can you hear?</h3>
-          <ul>
+          <ol>
             <li>Use headphones and crank up the volume</li>
-            <li>Mute all distractive applications</li>
-            <li>Hit the <span style="color: lightgreen">START</span> button and start listening</li>
-            <li>Hit any keyboard button or the <span style="color: lightgreen">BEEP</span> button when you hear a tone</li>
+            <li>Click the <span style="color: #3d3">START</span> button and start listening</li>
+            <li>Hit any keyboard button or the <span style="color: #fa3">BEEP</span> button when you hear a tone</li>
             <li>Test results will appear once the test is completed</li>
-          </ul>
+          </ol>
         </div>
       </div>
       <div class="graph">
@@ -30,29 +29,46 @@
         </div>
         <canvas class="graph__canvas"></canvas>
       </div>
+      <div class="test-status">
+        Idle
+      </div>
       <div class="controls">
-        <button class="controls__start">START</button>
-        <button class="controls__stop" disabled>STOP</button>
+        <button class="controls__start-stop">START</button>
         <button class="controls__register" disabled>BEEP</button>
         <span class="controls__confirmator"></span>
       </div>
     </div>
     <div class="footer">
-      <h2>About this test</h2>
+      <h1>About the test</h1>
+      <h2>What does the test measure?</h2>
       <p>
         The test is specialized in measuring relative hearing sensitivity in the frequency domain. It will help to identify possible hearing loss in particular frequency range. Unless carefully calibrated the absolute sensitivity levels will not be reliable.
       </p>
+      <h2>How to interpret the test results?</h2>
+      <p>The result graph consists of red (left ear) and blue (right ear) curves representing both ears. The frequencies start from low frequencies (left) and increase towards right.</p>
+      <p>The higher up the curve is positioned on the graph the better hearing sensitivity the ear has at that frequency range.</p>
+      <p>Hearing of high pitched (i.e. high frequency) tones will decline with age.</p>
+      <p>All the wovels and consonants are residing roughly between the range of 150 - 4500 Hz which means that one should successfully hear speech if the aforementioned range doesn't suffer from hearing loss.</p>
+      <h2>Tips</h2>
+      <p>
+        The volume should be set at very high level as the testing of potential hearing loss at particular frequency range requires very high intensity test tones. However, high-intensity test tones will not be generated if given frequencies are already sensed at lower intensity levels.
+      </p>
+      <p>
+        It's a good idea to mute any other applications to prevent distractions.
+      </p>
+      <h2>Test accuracy</h2>
       <p>
         Some of the major factors affecting the test's accuracy:
         <ul>
-          <li>Frequency response of headphones and the audio card</li>
-          <li>There's no easy way to calibrate the absolute intensity level of the test tones. This leads to <a href="https://en.wikipedia.org/wiki/Observational_error">systematic error</a> in the end results.</li>
+          <li>Frequency response of the headphones and the audio card</li>
+          <li>There's no easy way to calibrate the absolute intensity level of the test. This leads to <a href="https://en.wikipedia.org/wiki/Observational_error">systematic error</a> in the end results.</li>
           <li>Possible ambient noise</li>
           <li>All frequencies are tested with equal intensity while ears have non-linear <a href="https://en.wikipedia.org/wiki/Equal-loudness_contour">equal-loudness contour</a></li>
         </ul>
       </p>
+      <h2>Tech</h2>
       <p>
-        This test is powered by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>.
+        This test is powered by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. All code is written with vanilla JS, CSS and HTML. See source code at <a href="https://github.com/Luftare/hear-test">GitHub</a>.
       </p>
     </div>
     <a class="signature" href="https://luftare.com">By: Luftare</a>

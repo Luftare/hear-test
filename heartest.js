@@ -18,6 +18,7 @@ class HearTest {
     this.intensityLevels = 10;
     this.maxAttenuationIndB = 90;
     this.onTestReady = onTestReady;
+    this.isActive = false;
 
     this.tests = [...Array(this.octaves * 2)].map((_, i) => ({
       level: -1,
@@ -58,6 +59,7 @@ class HearTest {
   }
 
   startTest() {
+    this.isActive = true;
     this.tests = [...Array(this.octaves * 2)].map((_, i) => ({
       level: -1,
       passed: false,
@@ -71,6 +73,7 @@ class HearTest {
 
   stopTest() {
     clearTimeout(this.testTimeoutId);
+    this.isActive = false;
     return this.tests;
   }
 
@@ -137,6 +140,7 @@ class HearTest {
   }
 
   endTest() {
+    this.isActive = false;
     const data = {
       intensityLevels: this.intensityLevels,
       frequencies: this.frequencies,
