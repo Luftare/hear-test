@@ -1,4 +1,5 @@
 const canvas = document.querySelector(".graph__canvas");
+
 const hearTest = new HearTest({
   onTestReady: data => {
     const leftData = data.results.filter(test => test.ear === 0).map(test => test.level);
