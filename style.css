@@ -79,12 +79,12 @@ body {
   background-color: #444;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 200px;
+  grid-template-rows: 100px auto;
 }
 
 @media only screen and (min-width : 700px) {
   .header {
-    grid-template-columns: 200px 2fr;
+    grid-template-columns: 180px 2fr;
     grid-template-rows: 200px;
   }
 }
@@ -117,7 +117,7 @@ body {
 
 .header__details ol {
   padding-left: 16px;
-  margin: 4px 0 0;
+  margin: 8px 4px 8px;
 }
 
 .header__details li {
