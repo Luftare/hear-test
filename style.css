@@ -79,13 +79,13 @@ body {
   background-color: #444;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 140px;
+  grid-template-rows: 100px 200px;
 }
 
 @media only screen and (min-width : 700px) {
   .header {
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 120px;
+    grid-template-columns: 200px 2fr;
+    grid-template-rows: 200px;
   }
 }
 
@@ -95,12 +95,12 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 16px;
+  padding: 16px 32px;
   margin: 0;
+  word-wrap: normal;
 }
 
 .header__details {
-  font-size: 0.7em;
   padding-left: 16px;
   display: flex;
   flex-direction: column;
@@ -117,11 +117,11 @@ body {
 
 .header__details ol {
   padding-left: 16px;
-  margin: 0;
+  margin: 4px 0 0;
 }
 
 .header__details li {
-  margin: 0;
+  margin: 4px 0;
 }
 
 .controls {
@@ -203,7 +203,6 @@ body {
   max-width: 700px;
   padding: 0 16px;
   margin: 36px auto;
-  font-size: 0.8em;
   color: #444;
 }
 

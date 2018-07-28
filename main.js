@@ -41,6 +41,7 @@ document.querySelector('.controls__start-stop').addEventListener('click', (e) =>
     document.querySelector('.controls__confirmator').classList.add('controls__confirmator--red');
     document.querySelector('.graph__download-button').disabled = true;
     document.querySelector('.controls__register').disabled = false;
+    document.querySelector('.controls__register').focus();
     setStatusText('Test is running. Hit any key or the BEEP button when you hear a tone.');
   }
 });
@@ -68,17 +69,20 @@ window.addEventListener("keydown", (e) => {
 function initMobileAudio(e) {
   const osc = atx.createOscillator();
   const gain = atx.createGain();
-  gain.gain.setValueAtTime(0.0001, 0);
-  osc.frequency.setValueAtTime(250, 0);
+  gain.gain.setValueAtTime(0, 0);
+  osc.frequency.setValueAtTime(5, 0);
   osc.connect(gain);
   gain.connect(atx.destination);
+  gain.gain.setTargetAtTime(0.005, 0, 0.5);
   osc.start(0);
+  gain.gain.setTargetAtTime(0, 0.5, 0.5);
   setTimeout(() => {
+    gain.gain.cancelScheduledValues(0);
     osc.stop(0);
     osc.disconnect();
     gain.disconnect();
     window.removeEventListener('touchstart', initMobileAudio);
-  }, 700);
+  }, 1100);
 }
 
 window.addEventListener('touchstart', initMobileAudio);
