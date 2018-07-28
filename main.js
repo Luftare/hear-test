@@ -10,6 +10,7 @@ const hearTest = new HearTest({
     document.querySelector('.controls__stop').disabled = true;
     document.querySelector('.controls__confirmator').classList.remove('controls__confirmator--red');
     document.querySelector('.graph__download-button').disabled = false;
+    document.querySelector('.controls__register').disabled = true;
   }
 });
 
@@ -27,6 +28,7 @@ document.querySelector('.controls__start').addEventListener('click', () => {
   document.querySelector('.controls__stop').disabled = false;
   document.querySelector('.controls__confirmator').classList.add('controls__confirmator--red');
   document.querySelector('.graph__download-button').disabled = true;
+  document.querySelector('.controls__register').disabled = false;
 });
 
 document.querySelector('.controls__stop').addEventListener('click', () => {
@@ -34,6 +36,25 @@ document.querySelector('.controls__stop').addEventListener('click', () => {
   document.querySelector('.controls__start').disabled = false;
   document.querySelector('.controls__stop').disabled = true;
   document.querySelector('.controls__confirmator').classList.remove('controls__confirmator--red');
+  document.querySelector('.controls__register').disabled = true;
+});
+
+document.querySelector('.controls__register').addEventListener('mousedown', () => {
+  const confirmator = document.querySelector('.controls__confirmator');
+  confirmator.classList.add('controls__confirmator--green');
+  setTimeout(() => {
+    confirmator.classList.remove('controls__confirmator--green');
+  }, 200);
+  hearTest.handleResponse();
+});
+
+document.querySelector('.controls__register').addEventListener('touchstart', () => {
+  const confirmator = document.querySelector('.controls__confirmator');
+  confirmator.classList.add('controls__confirmator--green');
+  setTimeout(() => {
+    confirmator.classList.remove('controls__confirmator--green');
+  }, 200);
+  hearTest.handleResponse();
 });
 
 document.querySelector('.graph__download-button').addEventListener('click', () => {

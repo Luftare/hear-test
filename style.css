@@ -147,6 +147,27 @@ h1, h2, h3, h4 {
   color: grey;
 }
 
+.controls__register {
+  width: 90px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 18px;
+  color: lightgreen;
+  background-color: white;
+  box-shadow: 2px 2px 5px 0 #777;
+}
+
+.controls__register:active {
+  transform: translateY(1px) scale(0.99, 0.99);
+  box-shadow: none;
+}
+
+.controls__register:disabled {
+  color: grey;
+}
+
 .controls__confirmator {
   position: absolute;
   right: 16px;
