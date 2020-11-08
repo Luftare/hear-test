@@ -8,8 +8,8 @@ class HearTest {
     this.toneDuration = 1200;
     this.toneWaitTime = 3000;
     this.toneWaitTimeMaxRandomComponent = 4000;
-    this.lowestFrequency = 250;
-    this.octaves = 7;
+    this.lowestFrequency = 36;
+    this.octaves = 9;
     this.lastToneStartTime = 0;
     this.activeTone = null;
     this.toneEnvelopeTimeoutId = 0;
